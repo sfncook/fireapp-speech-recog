@@ -13,6 +13,15 @@ const initIncData = {
     {...allSectorsData[0], ...{units:[]}},
     {...allSectorsData[2], ...{units:[]}},
     {...allSectorsData[4], ...{units:[]}},
+    {...allSectorsData[5], ...{units:[]}},
+    {...allSectorsData[10], ...{units:[]}},
+    {...allSectorsData[8], ...{units:[]}},
+    {...allSectorsData[18], ...{units:[]}},
+    {...allSectorsData[1], ...{units:[]}},
+    {...allSectorsData[20], ...{units:[]}},
+    {...allSectorsData[16], ...{units:[]}},
+    {...allSectorsData[17], ...{units:[]}},
+    {...allSectorsData[25], ...{units:[]}},
   ]
 }
 
@@ -78,7 +87,7 @@ export default function Home() {
   }
 
   const processWriting = async (sectorObj, imageData)=>{
-    console.log(imageData)
+    // console.log(imageData)
     try {
       const response = await fetch("/api/upload", {
         method: "POST",
@@ -108,7 +117,6 @@ export default function Home() {
     }
   }
 
-  console.log('render')
   return (
     <>
       <Head>
