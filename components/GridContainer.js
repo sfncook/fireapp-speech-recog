@@ -1,7 +1,6 @@
 import * as React from "react";
 import GridItem from "./GridItem.js";
-import styles from '@/styles/Grid.module.css'
-import styles2 from '@/styles/Foo.module.css'
+import styles from '@/styles/GridContainer.module.css'
 
 export default function GridContainer({  }) {
   return (
