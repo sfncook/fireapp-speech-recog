@@ -3,7 +3,7 @@ import styles from '@/styles/GridItem.module.css'
 import WritingCanvas from "./WritingCanvas.js"
 import UnitsContainer from "@/components/UnitsContainer.js";
 
-export default function GridItem({ units, submitWriting }) {
+export default function Sector({ units, submitWriting }) {
 
   const [showCanvas, setShowCanvas] = React.useState(false)
 
