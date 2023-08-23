@@ -4,7 +4,7 @@ import styles from '@/styles/Unit.module.css'
 export default function Unit({ unit }) {
   return (
     <div className={styles.unit}>
-      {unit}
+      {unit.name}
     </div>
   );
 }

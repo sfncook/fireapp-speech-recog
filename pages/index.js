@@ -8,14 +8,6 @@ import units from '../data/units.json'
 
 const inter = Inter({ subsets: ['latin'] })
 
-// const initIncidentSectorsUnits = {
-//   sectors:[
-//     {"name":"Transportation", units:["E207","E222","E203"]},
-//     {"name":"Sector 3", units:["E215","L214"]},
-//     {"name":"IRIC", units:["SWA228","E9"]},
-//     {"name":"RESCUE", units:["Lt24","BT36","HM38"]},
-//   ]
-// }
 const initIncData = {
   sectors:[
     {...allSectorsData[0], ...{units:[]}},
@@ -71,6 +63,13 @@ export default function Home() {
     return resp
   }
 
+  const addUnitToSector = (unit, sectorObj) => {
+    console.log(`addUnitToSector unit:${unit.name} sectorObj:${sectorObj.name}`)
+    const sectorObjToUpdate = incidentData.sectors.find(s=>s.name===sectorObj.name)
+    sectorObjToUpdate.units.push(unit)
+    setIncidentData({...incidentData})
+  }
+
   const processWriting = async (sectorObj, imageData)=>{
     console.log(imageData)
     try {
@@ -89,13 +88,17 @@ export default function Home() {
       const sectorData = searchForSector(text)
       const unitData = searchForUnit(text)
       sectorData && sectorData.name && console.log(`**** sector:${sectorData.name}`)
-      unitData && unitData.name && console.log(`**** unit:${unitData.name}`)
+      if(unitData) {
+        console.log(`**** unit:${unitData.name}`)
+        addUnitToSector(unitData, sectorObj)
+      }
     } catch(error) {
       console.error(error);
       alert(error.message);
     }
   }
 
+  console.log('render')
   return (
     <>
       <Head>
