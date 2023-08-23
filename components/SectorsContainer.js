@@ -2,26 +2,7 @@ import * as React from "react";
 import Sector from "./Sector.js";
 import styles from '@/styles/SectorsContainer.module.css'
 
-export default function SectorsContainer({  }) {
-
-  const processWriting = async (sector, imageData)=>{
-    console.log(imageData)
-    try {
-      const response = await fetch("/api/upload", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({imageData}),
-      });
-
-      const data = await response.json();
-      console.log(data)
-    } catch(error) {
-      console.error(error);
-      alert(error.message);
-    }
-  }
+export default function SectorsContainer({ processWriting }) {
 
   return (
     <div className={styles.sectorscontainer}>

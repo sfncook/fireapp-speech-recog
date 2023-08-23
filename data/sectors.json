@@ -1,0 +1,43 @@
+[
+    {"name":"Interior", "aliases":["int"],"hasClock":true, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"Sector 1", "aliases":["1"],"hasClock":true, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"North Sector", "aliases":["north","nor"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"A-Side Sector", "aliases":["a"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+
+    {"name":"Sector 2", "aliases":["2"],"hasClock":true, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"Eat Sector", "aliases":["eat"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"Bravo Sector", "aliases":["brav","b"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+
+    {"name":"Ventilation", "aliases":["vent"],"hasClock":true, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"Sector 3", "aliases":["3"],"hasClock":true, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"South Sector", "aliases":["south","south"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"Charlie Sector", "aliases":["charlie","c"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+
+    {"name":"Roof", "aliases":[],"hasClock":true, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"Sector 4", "aliases":["4"],"hasClock":true, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"West Sector", "aliases":["west"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"Delta Sector", "aliases":["d"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+
+    {"name":"On Deck", "aliases":["deck"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"Overhaul", "aliases":[],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"IRIC", "aliases":[],"hasClock":true, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"Medical", "aliases":["med"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+
+    {"name":"Staging", "aliases":["stag"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"Salvage", "aliases":["salv"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"RIC", "aliases":[],"hasClock":true, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"Triage", "aliases":["tri"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+
+    {"name":"Lobby", "aliases":[],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"Customer Service", "aliases":["cs"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"RESCUE", "aliases":[],"hasClock":true, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"Treatment", "aliases":["treat"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+
+    {"name":"Accountability", "aliases":["acct"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"Evacuation", "aliases":["evac"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"Safety", "aliases":["safe"],"hasClock":true, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"Transportation", "aliases":["trans"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+
+    {"name":"Resource", "aliases":["res"],"hasClock":false, "hasAcctBtn":true, "hasPsiBtn":true, "hasActions":true},
+    {"name":"ReHab", "aliases":[],"hasClock":false, "hasAcctBtn":false, "hasPsiBtn":false, "hasActions":false}
+]
