@@ -11,8 +11,8 @@ const inter = Inter({ subsets: ['latin'] })
 const initIncData = {
   sectors:[
     {...allSectorsData[0], ...{units:[]}},
+    {...allSectorsData[2], ...{units:[]}},
     {...allSectorsData[4], ...{units:[]}},
-    {...allSectorsData[5], ...{units:[]}},
   ]
 }
 
@@ -70,6 +70,13 @@ export default function Home() {
     setIncidentData({...incidentData})
   }
 
+  const changeSector = (newSectorObj, sectorObj) => {
+    console.log(`changeSector newSectorObj:${newSectorObj.name} sectorObj:${sectorObj.name}`)
+    const sectorObjToUpdate = incidentData.sectors.find(s=>s.name===sectorObj.name)
+    sectorObjToUpdate.name = newSectorObj.name
+    setIncidentData({...incidentData})
+  }
+
   const processWriting = async (sectorObj, imageData)=>{
     console.log(imageData)
     try {
@@ -87,7 +94,10 @@ export default function Home() {
       const text = dataLowercase[0]
       const sectorData = searchForSector(text)
       const unitData = searchForUnit(text)
-      sectorData && sectorData.name && console.log(`**** sector:${sectorData.name}`)
+      if(sectorData) {
+        console.log(`**** sector:${sectorData.name}`)
+        changeSector(sectorData, sectorObj)
+      }
       if(unitData) {
         console.log(`**** unit:${unitData.name}`)
         addUnitToSector(unitData, sectorObj)

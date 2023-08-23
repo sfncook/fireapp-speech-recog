@@ -5,7 +5,7 @@ import Unit from "@/components/Unit.js";
 export default function UnitsContainer({ units }) {
   return (
     <div className={styles.unitscontainer}>
-      {units.map(u=><Unit key={u.name} unit={u}/> )}
+      {units.map((u,i)=><Unit key={`${u.name}${i}`} unit={u}/> )}
     </div>
   );
 }
