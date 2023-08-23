@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-import Grid from "@/components/Grid.js";
+import GridContainer from "@/components/GridContainer.js";
 import Foo from "@/components/Foo.js";
 
 const inter = Inter({ subsets: ['latin'] })
@@ -17,7 +17,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <Grid/>
+        <GridContainer/>
       </main>
     </>
   )

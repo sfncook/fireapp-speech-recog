@@ -2,7 +2,7 @@ import * as React from "react";
 import { ReactSketchCanvas } from "react-sketch-canvas";
 import styles from '@/styles/Cell.module.css'
 
-export default function Cell({  }) {
+export default function GridItem({  }) {
   const canvas = React.useRef()
 
   return (
