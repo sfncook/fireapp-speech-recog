@@ -3,4 +3,11 @@
   background-color: lightblue;
   margin: 2px;
   height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.griditemcanvas {
 }

@@ -7,18 +7,20 @@ export default function GridItem({  }) {
 
   return (
     <div className={styles.griditem}>
-      fuck
+      <div>Grid Item</div>
+      <button
+        onClick={() => {
+         console.log("click")
+        }}
+      >
+        Click Me
+      </button>
       <ReactSketchCanvas
         ref={canvas}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%"
-        }}
-        strokeWidth={4}
-        strokeColor="red"
+        className={styles.griditemcanvas}
+        strokeWidth={2}
+        strokeColor="blue"
+        height="6em"
       />
     </div>
   );
