@@ -1,9 +1,10 @@
 import * as React from "react";
-import styles from '@/styles/GridItem.module.css'
+import styles from '@/styles/Sector.module.css'
 import WritingCanvas from "./WritingCanvas.js"
 import UnitsContainer from "@/components/UnitsContainer.js";
+import SectorTitle from "@/components/SectorTitle.js";
 
-export default function Sector({ units, submitWriting }) {
+export default function Sector({ sector, submitWriting }) {
 
   const [showCanvas, setShowCanvas] = React.useState(false)
 
@@ -17,8 +18,9 @@ export default function Sector({ units, submitWriting }) {
   }
 
   return (
-    <div className={styles.griditem} onClick={()=>setShowCanvas(true)}>
-      <UnitsContainer units={units}/>
+    <div className={styles.sector} onClick={()=>setShowCanvas(true)}>
+      <SectorTitle sector={sector}/>
+      <UnitsContainer units={sector.units}/>
       {
         showCanvas && <WritingCanvas onTimeout={onWritingTimeout} onImageData={onImageData}/>
       }

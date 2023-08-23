@@ -1,9 +1,0 @@
-.gridcontainer {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
-  width: 100%; /* Adjusted width to fill available space */
-  /*max-width: 600px; !* Added a max-width for better responsiveness *!*/
-  padding: 20px; /* Added padding for spacing */
-  box-sizing: border-box; /* Include padding in width calculation */
-}
