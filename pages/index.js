@@ -25,8 +25,33 @@ export default function Home() {
     }
   }
 
-  const searchForSector = text => {
-
+  function searchForSector(text) {
+    let resp
+    sectors.every(sector => {
+      const nameMatches = sector.name.toLowerCase() === text
+      const aliasMatches = sector.aliases.find(alias=>{
+        console.log(`${alias}=?${text} ${alias===text}`)
+        return alias===text
+      })
+      if(nameMatches || aliasMatches) {
+        console.log(`nameMatches:${nameMatches} aliasMatches:${aliasMatches} sector:${sector.name}`)
+        resp = sector
+        return false
+      }
+      return true
+    })
+    return resp
+  }
+  const searchForUnit = text => {
+    let resp
+    units.every(unit => {
+      if(unit.name.toLowerCase() === text) {
+        resp = unit
+        return false
+      }
+      return true
+    })
+    return resp
   }
 
   const processWriting = async (sector, imageData)=>{
@@ -42,6 +67,11 @@ export default function Home() {
       const data = await response.json();
       const dataLowercase = data.map(d=>d.toLowerCase())
       console.log(`data:${data} dataLowercase:${dataLowercase}`)
+      const text = dataLowercase[0]
+      const sector = searchForSector(text)
+      const unit = searchForUnit(text)
+      console.log(`**** sector:${sector.name}`)
+      console.log(`**** unit:${unit}`)
     } catch(error) {
       console.error(error);
       alert(error.message);
