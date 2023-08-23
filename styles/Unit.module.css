@@ -1,10 +1,6 @@
 .unit {
-  position: relative;
   background-color: lightgoldenrodyellow;
-  margin: 2px;
-  height: 300px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  text-align: center;
+  padding: 2px;
+  border-radius: 3px;
 }
