@@ -1,0 +1,12 @@
+.actionstring {
+  width: 100%;
+  height: 25px;
+  text-align: right;
+  font-size: large;
+}
+.ocrstring {
+  width: 100%;
+  height: 25px;
+  text-align: left;
+  font-size: large;
+}

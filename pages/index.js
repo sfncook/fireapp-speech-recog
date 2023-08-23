@@ -3,8 +3,10 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import SectorsContainer from "@/components/SectorsContainer.js";
+import ActionString from "@/components/ActionString.js";
 import allSectorsData from '../data/sectors.json'
 import units from '../data/units.json'
+import OcrString from "@/components/OcrString.js";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,6 +30,8 @@ const initIncData = {
 export default function Home() {
 
   const [incidentData, _setIncidentData] = useState({});
+  const [ocrString, setOcrString] = useState();
+  const [actionString, setActionString] = useState();
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.localStorage) {
@@ -77,6 +81,7 @@ export default function Home() {
     const sectorObjToUpdate = incidentData.sectors.find(s=>s.name===sectorObj.name)
     sectorObjToUpdate.units.push(unit)
     setIncidentData({...incidentData})
+    setActionString(`Added ${unit.name} to sector ${sectorObj.name}`)
   }
 
   const changeSector = (newSectorObj, sectorObj) => {
@@ -84,6 +89,7 @@ export default function Home() {
     const sectorObjToUpdate = incidentData.sectors.find(s=>s.name===sectorObj.name)
     sectorObjToUpdate.name = newSectorObj.name
     setIncidentData({...incidentData})
+    setActionString(`Updated sector ${sectorObj.name}`)
   }
 
   const processWriting = async (sectorObj, imageData)=>{
@@ -99,17 +105,30 @@ export default function Home() {
 
       const data = await response.json();
       const dataLowercase = data.map(d=>d.toLowerCase())
-      console.log(`data:${data} dataLowercase:${dataLowercase}`)
-      const text = dataLowercase[0]
-      const sectorData = searchForSector(text)
-      const unitData = searchForUnit(text)
-      if(sectorData) {
-        console.log(`**** sector:${sectorData.name}`)
-        changeSector(sectorData, sectorObj)
-      }
-      if(unitData) {
-        console.log(`**** unit:${unitData.name}`)
-        addUnitToSector(unitData, sectorObj)
+      // console.log(`data:${data} dataLowercase:${dataLowercase}`)
+      if(dataLowercase && dataLowercase.length) {
+        dataLowercase.every(text => {
+          setOcrString(data[0])
+          const sectorData = searchForSector(text)
+          if(sectorData) {
+            console.log(`**** sector:${sectorData.name}`)
+            changeSector(sectorData, sectorObj)
+            return false
+          } else {
+            const unitData = searchForUnit(text)
+            if(unitData) {
+              console.log(`**** unit:${unitData.name}`)
+              addUnitToSector(unitData, sectorObj)
+              return false
+            } else {
+              setActionString(`Could not find sector or unit`)
+            }
+          }
+          return true
+        })
+      } else {
+        setOcrString("--")
+        setActionString("")
       }
     } catch(error) {
       console.error(error);
@@ -124,6 +143,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
+        <div className={styles.mainheader}>
+          <OcrString ocrStr={ocrString}/>
+          <ActionString actionStr={actionString}/>
+        </div>
         <SectorsContainer incidentData={incidentData} processWriting={processWriting}/>
       </main>
     </>
