@@ -1,8 +1,9 @@
 import * as React from "react";
 import styles from '@/styles/GridItem.module.css'
 import WritingCanvas from "./WritingCanvas.js"
+import UnitsContainer from "@/components/UnitsContainer.js";
 
-export default function GridItem({  }) {
+export default function GridItem({ units, submitWriting }) {
 
   const [showCanvas, setShowCanvas] = React.useState(false)
 
@@ -10,18 +11,16 @@ export default function GridItem({  }) {
     setShowCanvas(false)
   }
 
+  const onImageData = imageData=>{
+    setShowCanvas(false)
+    submitWriting()
+  }
+
   return (
     <div className={styles.griditem} onClick={()=>setShowCanvas(true)}>
-      <div>Grid Item</div>
-      <button
-        onClick={() => {
-         console.log("click")
-        }}
-      >
-        Click Me
-      </button>
+      <UnitsContainer units={units}/>
       {
-        showCanvas && <WritingCanvas onTimeout={onWritingTimeout}/>
+        showCanvas && <WritingCanvas onTimeout={onWritingTimeout} onImageData={onImageData}/>
       }
     </div>
   );

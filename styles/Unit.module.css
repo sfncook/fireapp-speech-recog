@@ -1,0 +1,10 @@
+.unit {
+  position: relative;
+  background-color: lightgoldenrodyellow;
+  margin: 2px;
+  height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

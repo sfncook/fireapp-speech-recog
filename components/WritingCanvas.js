@@ -3,7 +3,7 @@ import { ReactSketchCanvas } from "react-sketch-canvas";
 import styles from '@/styles/WritingCanvas.module.css'
 
 let timer = null
-export default function GridItem({ onTimeout, uploadImageData }) {
+export default function GridItem({ onTimeout, onImageData }) {
   const canvas = React.useRef()
   const [userStartedWriting, setUserStartedWriting] = React.useState(false)
   const [writingTimerId, setWritingTimerId] = React.useState(null)
