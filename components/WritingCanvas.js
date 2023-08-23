@@ -2,10 +2,30 @@ import * as React from "react";
 import { ReactSketchCanvas } from "react-sketch-canvas";
 import styles from '@/styles/WritingCanvas.module.css'
 
-export default function GridItem({ onTimeout }) {
+let timer = null
+export default function GridItem({ onTimeout, uploadImageData }) {
   const canvas = React.useRef()
+  const [userStartedWriting, setUserStartedWriting] = React.useState(false)
   const [writingTimerId, setWritingTimerId] = React.useState(null)
+
   const writingTimerDurMs = 750
+  const noActionTimerDurMs = 2000
+
+  // used to de-bounce useEffect which can be called twice in dev mode
+  const initialized = React.useRef(false);
+  React.useEffect(() => {
+    clearTimeout(timer)
+    timer = setTimeout(noActionTimeout, noActionTimerDurMs)
+  });
+
+  const noActionTimeout = ()=>{
+    if(!userStartedWriting) {
+      console.log("No activity, closing")
+      onTimeout()
+    } else {
+      console.log("Keep writing")
+    }
+  }
 
   const upload = async imgData=>{
     try {
@@ -28,7 +48,7 @@ export default function GridItem({ onTimeout }) {
   }
 
   const submitWriting = () => {
-    // console.log("counter:"+_counter)
+    console.log("submitWriting")
     if(canvas.current) {
       canvas.current
         .exportImage("png")
@@ -47,11 +67,18 @@ export default function GridItem({ onTimeout }) {
     }
   }
   const onCanvasPenUp = a => {
-    // console.log(a)
+    console.log(`onCanvasPenUp`)
+    console.log(a)
     clearTimeout(writingTimerId)
     const newTimer = setTimeout(submitWriting, writingTimerDurMs)
     // console.log(`clearingTimer:${writingTimerId} newTimer:${newTimer} counter:${counter}`)
     setWritingTimerId(newTimer)
+  }
+
+  const onCanvasChange = a => {
+    if(a.length) {
+      setUserStartedWriting(true)
+    }
   }
 
   return (
@@ -63,6 +90,7 @@ export default function GridItem({ onTimeout }) {
         strokeColor="blue"
         canvasColor="#ffffffdd"
         onStroke={onCanvasPenUp}
+        onChange={onCanvasChange}
       />
     </div>
   );
