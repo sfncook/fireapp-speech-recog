@@ -20,14 +20,14 @@ export default function GridItem({ onTimeout, onImageData }) {
 
   const noActionTimeout = ()=>{
     if(!userStartedWriting) {
-      console.log("No activity, closing")
+      // console.log("No activity, closing")
       onTimeout()
     } else {
-      console.log("Keep writing")
+      // console.log("Keep writing")
     }
   }
 
-  const upload = async imgData=>{
+  const upload = async imageData=>{
     try {
       const response = await fetch("/api/upload", {
         method: "POST",
@@ -35,12 +35,12 @@ export default function GridItem({ onTimeout, onImageData }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          imgData,
+          imageData,
         }),
       });
 
       const data = await response.json();
-      console.log(data)
+      // console.log(data)
     } catch(error) {
       console.error(error);
       alert(error.message);
@@ -48,16 +48,17 @@ export default function GridItem({ onTimeout, onImageData }) {
   }
 
   const submitWriting = () => {
-    console.log("submitWriting")
+    // console.log("submitWriting")
     if(canvas.current) {
       canvas.current
         .exportImage("png")
         .then((data) => {
-          console.log(data);
-          upload(data)
+          // console.log(data);
+          onImageData(data)
+          // upload(data)
         })
         .catch((e) => {
-          console.log(e);
+          console.error(e);
         })
         .finally(()=>{
           onTimeout()
@@ -67,8 +68,8 @@ export default function GridItem({ onTimeout, onImageData }) {
     }
   }
   const onCanvasPenUp = a => {
-    console.log(`onCanvasPenUp`)
-    console.log(a)
+    // console.log(`onCanvasPenUp`)
+    // console.log(a)
     clearTimeout(writingTimerId)
     const newTimer = setTimeout(submitWriting, writingTimerDurMs)
     // console.log(`clearingTimer:${writingTimerId} newTimer:${newTimer} counter:${counter}`)

@@ -4,7 +4,7 @@ import WritingCanvas from "./WritingCanvas.js"
 import UnitsContainer from "@/components/UnitsContainer.js";
 import SectorTitle from "@/components/SectorTitle.js";
 
-export default function Sector({ sector, submitWriting }) {
+export default function Sector({ sector, processWriting }) {
 
   const [showCanvas, setShowCanvas] = React.useState(false)
 
@@ -14,7 +14,7 @@ export default function Sector({ sector, submitWriting }) {
 
   const onImageData = imageData=>{
     setShowCanvas(false)
-    submitWriting()
+    processWriting(sector,imageData)
   }
 
   return (
