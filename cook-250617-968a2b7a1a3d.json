@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "cook-250617",
+  "private_key_id": "968a2b7a1a3d4117c25c4fe4c37fbecebcfcc24e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC81eLHaydPvSx/\ndmlapiAEPnU7L9m/wvBZW8J+aqqOf8kGl/Yk41dHFQWNjLG07Q4uk8O8aYNEp0kp\nV/FIqJduf3Rmswq9+v/8MbvXbsyCwzUZtOGf1q9EezAkrAPKjRjrJeaJK4Lp9M0n\n1q/Tin0hqiH2PfLZ2MC5pgXukdTg7FySGSXHIYnplk1LCPgmPVKn7aHVcZI10Emw\nHTlxxan16S4qygrEu07Vg8N/qAsYZnOgppgBYO1/L8XyCSWMqlkIX1U5Nx0/Zama\nRJctEl/SfH6ZkvCzplHBzpjo0/SoDjr9SDq9jxzC3ArANARZ1iKP71DsjIpDX2mL\n9GSHp1rxAgMBAAECggEACuVWhAYxSv8R4brt4k6im0wVTJh6un9fifBq/QtfkwBZ\nk5lSGRfLEe1rGBtNp7Bj+JkLGsSF0ADNDmcmI3ii4DvXdhOPo52nhqBCA/C/OS5V\nUonm2Oe0zkFDamJIh7fzf6H8tt59W82Fxu4y0AR2Kuqbsg8qA5rnp+6l+fmNLHst\nXHuDsJnwhoalQOu1FUh16Dw6Ppafmw7VuUdSIHpiAhUDnV3a9z0qpfxwp8U0GXBy\nOLvRdXtZf8gyH1ybpR1DdjlDX0l8OpCZZpjA2NJb8e8yiF35F06u7a/suOHXxVpa\nQ7tZHgW2pnBGoctThjJW11W5Tm4tx2BCAUDfyK+86QKBgQD49DrffORmrpG+j61l\nLzJ6VpLlffIER9s6608YveN/8bgdJU5Z7+GvUTrN476LgTvnvhxpPHtHTP12cCxB\nL+hNVNRFlB1UU3WT/5kzy+fDRGR//bwvUzllSyMq1nM72T+tySUABn+m278o/FYO\nrf65Cf9TKFz9nr5u4D1KsBHWtQKBgQDCLhLL6wNH9YOkQV5ZdMnXj1KlrOiBzJ65\nQi3KmrulF/3oRnmr0L7ShFAXi5s/koaa1YFVxtbkb3ve9JhqQQIMjGYGGJpo9NFi\nu5gZHBm8lxaB55eykM+chV67+K6ZHKa0Dn1pzszM2b9aMfJiBTZJ1Ch5x1Wu3FeA\nRaKEqlw8zQKBgHfrpaRcE+WGd7w0l5DjIEygAVi8x2TafDcwfERty/WoqUiY3Noj\n3DHITiw5ZWLr2MBz6lmjAbtB0eJIfHjWK+98SlhN1ab2IPAuskyqDzUXb9Xbkte1\nHjO18vXCoXWV27/J4aHWf40P01BZ5NZjaA0YTL5w9gJRgmgEamHc2Gr1AoGBAL2T\nW7iIPhDP6nC/fQybD8AK5iZntCudCM1XhftKq64XyUUvIPSUfOhsUwFZw/0B4bZi\ngb2rvfsRuH7Ij9EUnJqBq82B0aZsdcwN2AWTwLC1VT0ITLsB1B88umuL83H6Xepm\nRxy40IuifsXhA4GdEw5rOgUCjm2EI01RLsSUyi51AoGAc2XNElMjWTaSWbnN9i1j\npKyHhi9ZHpg5TXjp0Wc06MmfdjjydVNLJFHd3bahVocv0iE3vp9H9CC1FyVpeRWT\nScnM0obkMzFCFOdbmP/t6vNplHu4LzSM6CCdYYvwFJQnKIMUCdOKp2Iydq2EIQRL\nOKD6bfwiROvrUuRJTg/RrfY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "fireapp-heroku@cook-250617.iam.gserviceaccount.com",
+  "client_id": "110952853922276031258",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/fireapp-heroku%40cook-250617.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
