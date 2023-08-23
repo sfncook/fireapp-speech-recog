@@ -1,11 +1,14 @@
 import * as React from "react";
-import { ReactSketchCanvas } from "react-sketch-canvas";
 import styles from '@/styles/GridItem.module.css'
 import WritingCanvas from "./WritingCanvas.js"
 
 export default function GridItem({  }) {
 
   const [showCanvas, setShowCanvas] = React.useState(false)
+
+  const onWritingTimeout = ()=>{
+    setShowCanvas(false)
+  }
 
   return (
     <div className={styles.griditem} onClick={()=>setShowCanvas(true)}>
@@ -18,7 +21,7 @@ export default function GridItem({  }) {
         Click Me
       </button>
       {
-        showCanvas && <WritingCanvas/>
+        showCanvas && <WritingCanvas onTimeout={onWritingTimeout}/>
       }
     </div>
   );
