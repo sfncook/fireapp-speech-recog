@@ -30,11 +30,11 @@ export default function Home() {
     sectors.every(sector => {
       const nameMatches = sector.name.toLowerCase() === text
       const aliasMatches = sector.aliases.find(alias=>{
-        console.log(`${alias}=?${text} ${alias===text}`)
+        // console.log(`${alias}=?${text} ${alias===text}`)
         return alias===text
       })
       if(nameMatches || aliasMatches) {
-        console.log(`nameMatches:${nameMatches} aliasMatches:${aliasMatches} sector:${sector.name}`)
+        // console.log(`nameMatches:${nameMatches} aliasMatches:${aliasMatches} sector:${sector.name}`)
         resp = sector
         return false
       }
@@ -55,6 +55,7 @@ export default function Home() {
   }
 
   const processWriting = async (sector, imageData)=>{
+    console.log(imageData)
     try {
       const response = await fetch("/api/upload", {
         method: "POST",
@@ -70,8 +71,8 @@ export default function Home() {
       const text = dataLowercase[0]
       const sector = searchForSector(text)
       const unit = searchForUnit(text)
-      console.log(`**** sector:${sector.name}`)
-      console.log(`**** unit:${unit}`)
+      sector && sector.name && console.log(`**** sector:${sector.name}`)
+      unit && unit.name && console.log(`**** unit:${unit.name}`)
     } catch(error) {
       console.error(error);
       alert(error.message);
