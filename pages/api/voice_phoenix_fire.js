@@ -19,8 +19,8 @@ export default async function (req, res) {
     return;
   }
 
-  const model = 'gpt-3.5-turbo'
-  // const model =  'gpt-4-0613'
+  // const model = 'gpt-3.5-turbo'
+  const model =  'gpt-4-0613'
 
   try {
     const voiceText = req.body.voiceText
@@ -56,11 +56,11 @@ export default async function (req, res) {
               - This statement generally indicates which unit the user is assigned to, where they are located and perhaps the name of the command center where they are located
           Respond with only a JSON structure.
         `},
-        {role: 'user', content: voiceText},
+        // {role: 'user', content: voiceText},
         // {role: 'user', content: `Add north sector`},
         // {role: 'user', content: `Add north sector`},
         // {role: 'user', content: `Add north, south, eat, and safety.  Engine100 goes to North, Ladder 200 is in eat`},
-        // {role: 'user', content:  'Engine 11 is on the scene of a large two‐story school with a working fire on the second floor. Engine 11 is laying a supply line and going in with a hand‐line to the second floor for search & rescue and fire attack. This is an offensive fire attack. Engine 11 will be 7th Street Command.'},
+        {role: 'user', content:  'Engine 11 is on the scene of a large two‐story school with a working fire on the second floor. Engine 11 is laying a supply line and going in with a hand‐line to the second floor for search & rescue and fire attack. This is an offensive fire attack. Engine 11 will be 7th Street Command.'},
         // {role: 'user', content:  'Engine 11 is on the scene of a medium size warehouse fully involved with exposures to the east. Engine 11 is laying a supply line and attacking the fire with a stang gun and a hand‐line to the east exposure to check for extension. This is a defensive fire.  Engine 11 will be Buckeye Command.'},
         // {role: 'user', content:  "Ladder 11 is on the scene with a multi‐vehicle accident. Give me the balance of a 2 and 1 medical with three ambulances. Ladder 11 will be Parkway Command."},
       ],

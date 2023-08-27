@@ -81,7 +81,7 @@ export default function Home() {
   const processVoiceText = async voiceText => {
     console.log(voiceText)
     try {
-      const response = await fetch("/api/voice", {
+      const response = await fetch("/api/voice_sectors_units", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
