@@ -90,19 +90,10 @@ export default function Home() {
   }
 
   const addAllSectors = sectorNames => {
-    const sectors = incidentData.sectors
     sectorNames.forEach(sectorName => {
       incidentData.sectors.push({name:sectorName, units:[]})
     })
-    // setIncidentData(incidentData)
-    setIncidentData(
-      {
-        sectors:[{name:"fart booger", units:[]}],
-        units:[],
-        unitToSectorAssignments:[],
-        accountability:[]
-      }
-    )
+    setIncidentData({...incidentData})
   }
 
   const processVoiceText = async voiceText => {
