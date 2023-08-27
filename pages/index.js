@@ -10,22 +10,7 @@ import OcrString from "@/components/OcrString.js";
 
 const inter = Inter({ subsets: ['latin'] })
 
-const initIncData = {
-  sectors:[
-    {...allSectorsData[0], ...{units:[]}},
-    {...allSectorsData[2], ...{units:[]}},
-    {...allSectorsData[4], ...{units:[]}},
-    {...allSectorsData[5], ...{units:[]}},
-    {...allSectorsData[10], ...{units:[]}},
-    {...allSectorsData[8], ...{units:[]}},
-    {...allSectorsData[18], ...{units:[]}},
-    {...allSectorsData[1], ...{units:[]}},
-    {...allSectorsData[20], ...{units:[]}},
-    {...allSectorsData[16], ...{units:[]}},
-    {...allSectorsData[17], ...{units:[]}},
-    {...allSectorsData[25], ...{units:[]}},
-  ]
-}
+const initIncData = {}
 
 export default function Home() {
 
