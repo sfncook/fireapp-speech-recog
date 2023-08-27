@@ -78,44 +78,19 @@ export default function Home() {
     setActionString(`Updated sector ${sectorObj.name}`)
   }
 
-  const processWriting = async (sectorObj, imageData)=>{
-    // console.log(imageData)
+  const processVoiceText = async voiceText => {
+    console.log(voiceText)
     try {
-      const response = await fetch("/api/upload", {
+      const response = await fetch("/api/voice", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({imageData}),
+        body: {voiceText},
       });
 
-      const data = await response.json();
-      const dataLowercase = data.map(d=>d.toLowerCase())
-      // console.log(`data:${data} dataLowercase:${dataLowercase}`)
-      if(dataLowercase && dataLowercase.length) {
-        dataLowercase.every(text => {
-          setOcrString(data[0])
-          const sectorData = searchForSector(text)
-          if(sectorData) {
-            console.log(`**** sector:${sectorData.name}`)
-            changeSector(sectorData, sectorObj)
-            return false
-          } else {
-            const unitData = searchForUnit(text)
-            if(unitData) {
-              console.log(`**** unit:${unitData.name}`)
-              addUnitToSector(unitData, sectorObj)
-              return false
-            } else {
-              setActionString(`Could not find sector or unit`)
-            }
-          }
-          return true
-        })
-      } else {
-        setOcrString("--")
-        setActionString("")
-      }
+      const data = await response.json()
+      console.log(data)
     } catch(error) {
       console.error(error);
       alert(error.message);
@@ -130,7 +105,7 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.mainheader}>
-          <Transcriber/>
+          <Transcriber processVoiceText={processVoiceText}/>
           <OcrString ocrStr={ocrString}/>
           <ActionString actionStr={actionString}/>
         </div>
