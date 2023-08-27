@@ -147,7 +147,7 @@ export default function Home() {
           <OcrString ocrStr={ocrString}/>
           <ActionString actionStr={actionString}/>
         </div>
-        <SectorsContainer incidentData={incidentData} processWriting={processWriting}/>
+        <SectorsContainer incidentData={incidentData}/>
       </main>
     </>
   )
