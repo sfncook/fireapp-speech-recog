@@ -86,7 +86,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: {voiceText},
+        body: JSON.stringify({voiceText}),
       });
 
       const data = await response.json()

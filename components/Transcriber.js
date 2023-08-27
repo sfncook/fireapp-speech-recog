@@ -10,7 +10,7 @@ export default function Transcriber({ processVoiceText }) {
   useEffect( () => {
     if (typeof window !== 'undefined' && window.localStorage) {
       const r = new window.webkitSpeechRecognition()
-      console.log(r)
+      // console.log(r)
       setRecognition(r)
       r.lang = 'en-US';
 
