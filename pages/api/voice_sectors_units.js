@@ -60,8 +60,8 @@ export default async function (req, res) {
           }
         `},
         // {role: 'user', content: voiceText},
-        {role: 'user', content:  'Engine 11 is on the scene of a large two‐story school with a working fire on the second floor. Engine 11 is laying a supply line and going in with a hand‐line to the second floor for search & rescue and fire attack. This is an offensive fire attack. Engine 11 will be 7th Street Command.'},
-        // {role: 'user', content:  'Engine 11 is on the scene of a medium size warehouse fully involved with exposures to the east. Engine 11 is laying a supply line and attacking the fire with a stang gun and a hand‐line to the east exposure to check for extension. This is a defensive fire.  Engine 11 will be Buckeye Command.'},
+        // {role: 'user', content:  'Engine 11 is on the scene of a large two‐story school with a working fire on the second floor. Engine 11 is laying a supply line and going in with a hand‐line to the second floor for search & rescue and fire attack. This is an offensive fire attack. Engine 11 will be 7th Street Command.'},
+        {role: 'user', content:  'Engine 11 is on the scene of a medium size warehouse fully involved with exposures to the east. Engine 11 is laying a supply line and attacking the fire with a stang gun and a hand‐line to the east exposure to check for extension. This is a defensive fire.  Engine 11 will be Buckeye Command.'},
         // {role: 'user', content:  'Engine 11 will be North side accountability. Give me the balance a 1st Alarm.'},
         // {role: 'user', content:  "Ladder 11 is on the scene with a multi‐vehicle accident. Give me the balance of a 2 and 1 medical with three ambulances. Ladder 11 will be Parkway Command."},
       ],
