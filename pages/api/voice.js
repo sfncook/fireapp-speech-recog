@@ -17,8 +17,8 @@ export default async function (req, res) {
     return;
   }
 
-  // const model = 'gpt-3.5-turbo'
-  const model =  'gpt-4-0613'
+  const model = 'gpt-3.5-turbo'
+  // const model =  'gpt-4-0613'
 
   console.log('calling')
   try {
