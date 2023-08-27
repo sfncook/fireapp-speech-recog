@@ -4,6 +4,8 @@ import styles from '@/styles/SectorsContainer.module.css'
 
 export default function SectorsContainer({ incidentData }) {
 
+  console.log("SectorsContainer")
+  console.log(incidentData.sectors)
   return (
     <div className={styles.sectorscontainer}>
       {incidentData.sectors && incidentData.sectors.map((s,i)=>

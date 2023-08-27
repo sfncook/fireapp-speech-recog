@@ -11,71 +11,98 @@ import Transcriber from "@/components/Transcriber.js";
 
 const inter = Inter({ subsets: ['latin'] })
 
-const initIncData = {}
+const initIncData = {
+  sectors:[],
+  units:[],
+  unitToSectorAssignments:[],
+  accountability:[]
+}
 
 export default function Home() {
 
-  const [incidentData, _setIncidentData] = useState({});
+  const [incidentData, setIncidentData] = useState(initIncData);
   const [ocrString, setOcrString] = useState();
   const [actionString, setActionString] = useState();
 
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      setIncidentData(JSON.parse(localStorage.getItem('incidentData')) || initIncData)
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined' && window.localStorage) {
+  //     // setIncidentData(JSON.parse(localStorage.getItem('incidentData')) || initIncData)
+  //     setIncidentData(initIncData)
+  //   }
+  // }, [])
+  //
+  // function setIncidentData(_incidentData) {
+  //   console.log(`setIncidentData`)
+  //   console.log(_incidentData.sectors)
+  //   if (typeof window !== "undefined" && window.localStorage) {
+  //     // localStorage.setItem("incidentData", JSON.stringify(_incidentData))
+  //     _setIncidentData(_incidentData)
+  //   }
+  // }
 
-  function setIncidentData(_incidentData) {
-    // console.log("setIncidentData"+JSON.stringify(_incidentData))
-    if (typeof window !== "undefined" && window.localStorage) {
-      localStorage.setItem("incidentData", JSON.stringify(_incidentData))
-      _setIncidentData(_incidentData)
-    }
+  // function searchForSector(text) {
+  //   let resp
+  //   allSectorsData.every(sectorData => {
+  //     const nameMatches = sectorData.name.toLowerCase() === text
+  //     const aliasMatches = sectorData.aliases.find(alias=>{
+  //       // console.log(`${alias}=?${text} ${alias===text}`)
+  //       return alias===text
+  //     })
+  //     if(nameMatches || aliasMatches) {
+  //       // console.log(`nameMatches:${nameMatches} aliasMatches:${aliasMatches} sector:${sector.name}`)
+  //       resp = sectorData
+  //       return false
+  //     }
+  //     return true
+  //   })
+  //   return resp
+  // }
+  // const searchForUnit = text => {
+  //   let resp
+  //   units.every(unit => {
+  //     if(unit.name.toLowerCase() === text) {
+  //       resp = unit
+  //       return false
+  //     }
+  //     return true
+  //   })
+  //   return resp
+  // }
+
+  // const addUnitToSector = (unit, sectorObj) => {
+  //   console.log(`addUnitToSector unit:${unit.name} sectorObj:${sectorObj.name}`)
+  //   const sectorObjToUpdate = incidentData.sectors.find(s=>s.name===sectorObj.name)
+  //   sectorObjToUpdate.units.push(unit)
+  //   setIncidentData({...incidentData})
+  //   setActionString(`Added ${unit.name} to sector ${sectorObj.name}`)
+  // }
+  //
+  // const changeSector = (newSectorObj, sectorObj) => {
+  //   console.log(`changeSector newSectorObj:${newSectorObj.name} sectorObj:${sectorObj.name}`)
+  //   const sectorObjToUpdate = incidentData.sectors.find(s=>s.name===sectorObj.name)
+  //   sectorObjToUpdate.name = newSectorObj.name
+  //   setIncidentData({...incidentData})
+  //   setActionString(`Updated sector ${sectorObj.name}`)
+  // }
+
+  const findSectorInSceneByName = sectorName => {
+    return incidentData.sectors.find(s=>s.name===sectorObj.name)
   }
 
-  function searchForSector(text) {
-    let resp
-    allSectorsData.every(sectorData => {
-      const nameMatches = sectorData.name.toLowerCase() === text
-      const aliasMatches = sectorData.aliases.find(alias=>{
-        // console.log(`${alias}=?${text} ${alias===text}`)
-        return alias===text
-      })
-      if(nameMatches || aliasMatches) {
-        // console.log(`nameMatches:${nameMatches} aliasMatches:${aliasMatches} sector:${sector.name}`)
-        resp = sectorData
-        return false
-      }
-      return true
+  const addAllSectors = sectorNames => {
+    const sectors = incidentData.sectors
+    sectorNames.forEach(sectorName => {
+      incidentData.sectors.push({name:sectorName, units:[]})
     })
-    return resp
-  }
-  const searchForUnit = text => {
-    let resp
-    units.every(unit => {
-      if(unit.name.toLowerCase() === text) {
-        resp = unit
-        return false
+    // setIncidentData(incidentData)
+    setIncidentData(
+      {
+        sectors:[{name:"fart booger", units:[]}],
+        units:[],
+        unitToSectorAssignments:[],
+        accountability:[]
       }
-      return true
-    })
-    return resp
-  }
-
-  const addUnitToSector = (unit, sectorObj) => {
-    console.log(`addUnitToSector unit:${unit.name} sectorObj:${sectorObj.name}`)
-    const sectorObjToUpdate = incidentData.sectors.find(s=>s.name===sectorObj.name)
-    sectorObjToUpdate.units.push(unit)
-    setIncidentData({...incidentData})
-    setActionString(`Added ${unit.name} to sector ${sectorObj.name}`)
-  }
-
-  const changeSector = (newSectorObj, sectorObj) => {
-    console.log(`changeSector newSectorObj:${newSectorObj.name} sectorObj:${sectorObj.name}`)
-    const sectorObjToUpdate = incidentData.sectors.find(s=>s.name===sectorObj.name)
-    sectorObjToUpdate.name = newSectorObj.name
-    setIncidentData({...incidentData})
-    setActionString(`Updated sector ${sectorObj.name}`)
+    )
   }
 
   const processVoiceText = async voiceText => {
@@ -90,10 +117,25 @@ export default function Home() {
       });
 
       const data = await response.json()
-      console.log(data)
+      console.log(data.result)
+      const responseObj = JSON.parse(data.result)
+      console.log(responseObj.sectors)
+      addAllSectors(responseObj.sectors)
+
+      // {
+      //   sections: ["Interior", "Roof"],
+      //     units: ["E284", "L281"],
+      //   unitToSectorAssignments: [
+      //   {
+      //     sector: "Interior",
+      //     unit: "E284"
+      //   }
+      // ],
+      //   accountability: ["L281"]
+      // }
     } catch(error) {
       console.error(error);
-      alert(error.message);
+      // alert(error.message);
     }
   }
 

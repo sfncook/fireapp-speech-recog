@@ -33,7 +33,7 @@ export default function Transcriber({ processVoiceText }) {
   const stopRecord = async () => {
     console.log("Stop record")
     setIsRecording(false)
-    recognition.stop()
+    setTimeout(async ()=>{recognition.stop()}, 750)
   }
 
   return (
