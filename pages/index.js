@@ -7,6 +7,7 @@ import ActionString from "@/components/ActionString.js";
 import allSectorsData from '../data/sectors.json'
 import units from '../data/units.json'
 import OcrString from "@/components/OcrString.js";
+import Transcriber from "@/components/Transcriber.js";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -129,6 +130,7 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <div className={styles.mainheader}>
+          <Transcriber/>
           <OcrString ocrStr={ocrString}/>
           <ActionString actionStr={actionString}/>
         </div>
