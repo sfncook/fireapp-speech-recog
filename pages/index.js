@@ -12,8 +12,7 @@ import Transcriber from "@/components/Transcriber.js";
 const inter = Inter({ subsets: ['latin'] })
 
 const initIncData = {
-  sectorsByName:{},
-  unisByName:{},
+  sectorsByName:{}
 }
 
 export default function Home() {
@@ -91,7 +90,7 @@ export default function Home() {
     sectorNames.forEach(sectorName => {
       incidentData.sectorsByName[sectorName] =
         incidentData.sectorsByName[sectorName] ||
-        {name:sectorName, units:[]}
+        {name:sectorName, unitsByName:{}}
     })
     setIncidentData({...incidentData})
   }
@@ -105,10 +104,8 @@ export default function Home() {
     unitsAndSectors.forEach(({unit, sector}) => {
       incidentData.sectorsByName[sector] =
         incidentData.sectorsByName[sector] ||
-        {name:sector, units:[]}
-      incidentData.sectorsByName[sector].units.push(
-        {name:unit, actions:[]}
-      )
+        {name:sector, unitsByName:{}}
+      incidentData.sectorsByName[sector].unitsByName[unit] = {name:unit, actions:[]}
     })
     setIncidentData({...incidentData})
   }

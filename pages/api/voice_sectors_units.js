@@ -42,6 +42,7 @@ export default async function (req, res) {
             "SQ" = "Squad"
             "Br" = "Brush"
           Other units don't have numbers, just pure unit types, like "Ambo", "Native Air", or "Life Net"
+          Units are never sectors
             
           Try to determine which sectors units are being assigned to.  If a unit is on scene but is not specifically assigned to a sector then don't mention it in the unitAssignments.
           
