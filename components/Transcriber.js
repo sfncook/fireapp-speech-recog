@@ -39,13 +39,14 @@ export default function Transcriber({ processVoiceText }) {
   return (
     <div className={styles.transcriber}>
       <input
+        className={styles.recordButton}
         type="button"
-        value='Record'
+        value='Press & Hold to enter radio command'
         onTouchStart={startRecord}
         onTouchEnd={stopRecord}
         onMouseDown={startRecord}
         onMouseUp={stopRecord}
-        style={{backgroundColor:(isRecording ? 'lightsalmon': 'lightblue')}}
+        style={{backgroundColor:(isRecording ? 'lightsalmon': 'lightgreen')}}
       />
       <div>{transcription}</div>
     </div>
