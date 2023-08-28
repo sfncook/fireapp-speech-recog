@@ -1,5 +1,5 @@
-.writingcanvas {
-  position: absolute;
-  top: 0;
-  left: 0;
+.transcriber {
+  width: 100%;
+  color: darkgray;
+  font-style: italic;
 }

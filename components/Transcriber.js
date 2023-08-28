@@ -37,7 +37,7 @@ export default function Transcriber({ processVoiceText }) {
   }
 
   return (
-    <div>
+    <div className={styles.transcriber}>
       <input
         type="button"
         value='Record'
