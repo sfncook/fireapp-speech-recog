@@ -96,6 +96,23 @@ export default function Home() {
     setIncidentData({...incidentData})
   }
 
+  // unitsAndSectors:
+  // {
+  //   sector: "Interior",
+  //     unit: "E284"
+  // }
+  const addAllUnitsToSectors = unitsAndSectors => {
+    unitsAndSectors.forEach(({unit, sector}) => {
+      incidentData.sectorsByName[sector] =
+        incidentData.sectorsByName[sector] ||
+        {name:sector, units:[]}
+      incidentData.sectorsByName[sector].units.push(
+        {name:unit, actions:[]}
+      )
+    })
+    setIncidentData({...incidentData})
+  }
+
   const processVoiceText = async voiceText => {
     console.log(voiceText)
     try {
@@ -108,11 +125,7 @@ export default function Home() {
       });
 
       const data = await response.json()
-      console.log(data.result)
-      const responseObj = JSON.parse(data.result)
-      console.log(responseObj.sectors)
-      addAllSectors(responseObj.sectors)
-
+      // data.result:
       // {
       //   sections: ["Interior", "Roof"],
       //     units: ["E284", "L281"],
@@ -124,6 +137,10 @@ export default function Home() {
       // ],
       //   accountability: ["L281"]
       // }
+      console.log(data.result)
+      const responseObj = JSON.parse(data.result)
+      addAllSectors(responseObj.sectors)
+      addAllUnitsToSectors(responseObj.unitToSectorAssignments)
     } catch(error) {
       console.error(error);
       // alert(error.message);
