@@ -101,11 +101,18 @@ export default function Home() {
   //     unit: "E284"
   // }
   const addAllUnitsToSectors = unitsAndSectors => {
-    unitsAndSectors.forEach(({unit, sector}) => {
-      incidentData.sectorsByName[sector] =
-        incidentData.sectorsByName[sector] ||
+    unitsAndSectors.forEach(({unit:unitName, sector:sectorName}) => {
+      // Remove Unit from previous sector
+      (Object.values(incidentData.sectorsByName) || [])
+        .forEach(sector => {
+          if(sector.name !== sectorName) {
+            delete sector.unitsByName[unitName]
+          }
+        })
+      incidentData.sectorsByName[sectorName] =
+        incidentData.sectorsByName[sectorName] ||
         {name:sector, unitsByName:{}}
-      incidentData.sectorsByName[sector].unitsByName[unit] = {name:unit, actions:[]}
+      incidentData.sectorsByName[sectorName].unitsByName[unitName] = {name:unitName, actions:[]}
     })
     setIncidentData({...incidentData})
   }
