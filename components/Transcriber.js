@@ -11,9 +11,11 @@ export default function Transcriber({ processVoiceText }) {
   useEffect( () => {
     if (typeof window !== 'undefined' && window.localStorage) {
       const r = new window.webkitSpeechRecognition()
-      // console.log(r)
-      setRecognition(r)
+      r.persistent = true; // Enable permission persistence
       r.lang = 'en-US';
+      r.start()
+      r.stop()
+      setRecognition(r)
 
       r.onresult = async event => {
         const t = Array.from(event.results)
