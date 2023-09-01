@@ -6,7 +6,6 @@ import styles from '@/styles/CurSec.module.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home()  {
-  const [audioFile, setAudioFile] = useState(null);
   const [allSeconds, setAllSeconds] = useState([]);
   const [processedSecs, setProcessedSecs] = useState([]);
   const [state, setState] = useState({});
@@ -30,11 +29,6 @@ export default function Home()  {
       // alert(error.message)
     }
   }, []);
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setAudioFile(URL.createObjectURL(file));
-  };
 
   const onTimeUpdate = async () => {
     const curSec = Math.floor(aud.current.currentTime)
@@ -67,8 +61,8 @@ export default function Home()  {
         </Head>
         <main className={`${styles.main} ${inter.className}`}>
           <div>
-            <input type="file" accept="audio/*" onChange={handleFileChange} />
-            {audioFile && <audio controls src={audioFile} onTimeUpdate={onTimeUpdate} ref={aud} />}
+            <div>House Fire @ 1564 West Linder</div>
+            <audio controls src='audio/F2022119715_orig_regenerated.wav' onTimeUpdate={onTimeUpdate} ref={aud} />
           </div>
         </main>
       </>
