@@ -1,0 +1,25 @@
+.objectTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.objectTable th, .objectTable td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.objectTable th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.keyCell {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.valueCell {
+  font-style: italic;
+  width: 100%;
+}
