@@ -8,9 +8,10 @@ const openai = new OpenAI({
 });
 
 export default async function (req, res) {
+  console.log(`gptInference`)
+  console.log(JSON.stringify(req.body))
   const inputTxt = req.body.inputTxt
-  const state = req.body.state
-  console.log(`gptInference: ${inputTxt}\n${state}`)
+  const state = JSON.stringify(req.body.state)
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
@@ -48,7 +49,7 @@ export default async function (req, res) {
             - (parDeclared) Which units have declared PAR (if a PAR is being collected then which units have declared PAR? Should be a list of unit names)
         `
     // If not empty state:
-    if(state && Object.keys(state)) {
+    if(state && Object.keys(state).length>0) {
       prompt = prompt + `
         Update the fields for this JSON object:
           ${state}
