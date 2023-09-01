@@ -39,29 +39,24 @@ export default function Home()  {
   const onTimeUpdate = async () => {
     const curSec = Math.floor(aud.current.currentTime)
     if(allSeconds.includes(curSec) && !processedSecs.includes(curSec)) {
-      console.log(`process sec:${curSec}`)
+      console.log(`process curSec:${curSec}`)
       setProcessedSecs([...processedSecs, curSec])
+      try {
+        const response = await fetch("/api/curSec", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({curSec}),
+        });
+
+        const data = await response.json()
+        console.log(data.result)
+      } catch(error) {
+        console.error(error);
+        // alert(error.message)
+      }
     }
-    // Transmit time value every second
-    // if(curSec - prevSec >= 1) {
-      // setPrevSec(curSec)
-      // console.log(`transmitting curSec: ${curSec}`)
-      // try {
-      //   const response = await fetch("/api/curSec", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify({curSec}),
-      //   });
-      //
-      //   const data = await response.json()
-      //   console.log(data.result)
-      // } catch(error) {
-      //   console.error(error);
-      //   // alert(error.message)
-      // }
-    // }
   }
 
   return (

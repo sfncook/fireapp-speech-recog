@@ -10,9 +10,8 @@ export default async function (req, res) {
   const curSec = req.body.curSec
   console.log(`curSec ${curSec}`)
   try {
-    console.log(completion.choices[0].message.content)
     res.status(200).json({
-      result: completion.choices[0].message.content,
+      result: secToState[curSec],
     });
   } catch(error) {
     // Consider adjusting the error handling logic for your use case
