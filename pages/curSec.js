@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+import styles from '@/styles/CurSec.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home()  {
   const [audioFile, setAudioFile] = useState(null);
-  const [prevSec, setPrevSec] = useState(0);
   const [allSeconds, setAllSeconds] = useState([]);
   const [processedSecs, setProcessedSecs] = useState([]);
+  const [state, setState] = useState({});
   const aud = useRef()
 
   useEffect( () => {
@@ -60,9 +60,17 @@ export default function Home()  {
   }
 
   return (
-      <div>
-        <input type="file" accept="audio/*" onChange={handleFileChange} />
-        {audioFile && <audio controls src={audioFile} onTimeUpdate={onTimeUpdate} ref={aud} />}
-      </div>
-  );
+      <>
+        <Head>
+          <title>Fire App</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
+        <main className={`${styles.main} ${inter.className}`}>
+          <div>
+            <input type="file" accept="audio/*" onChange={handleFileChange} />
+            {audioFile && <audio controls src={audioFile} onTimeUpdate={onTimeUpdate} ref={aud} />}
+          </div>
+        </main>
+      </>
+  )
 }
