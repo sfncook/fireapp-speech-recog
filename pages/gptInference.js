@@ -12,23 +12,25 @@ const initIncData = {
 export default function Home() {
 
   const [inputTxt, setInputTxt] = useState('');
-  const [outputTxt, setOutputTxt] = useState('');
+  const [state, setState] = useState({})
   const inputTxtRef = useRef()
 
   const submit = async () => {
-    setOutputTxt('')
     try {
       const response = await fetch("/api/gptInference", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({inputTxt}),
+        body: JSON.stringify({
+          inputTxt,
+          state,
+        }),
       });
 
       const data = await response.json()
       console.log(data.result)
-      setOutputTxt(data.result)
+      setState(data.result)
     } catch(error) {
       console.error(error);
       alert(error.message)
@@ -54,7 +56,7 @@ export default function Home() {
             onChange={onTextChange}
             ref={inputTxtRef}
         />
-        <div>{outputTxt}</div>
+        <div>{JSON.stringify(state)}</div>
       </main>
     </>
   )

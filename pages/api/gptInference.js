@@ -9,7 +9,8 @@ const openai = new OpenAI({
 
 export default async function (req, res) {
   const inputTxt = req.body.inputTxt
-  console.log(`gptInference: ${inputTxt}`)
+  const state = req.body.state
+  console.log(`gptInference: ${inputTxt}\n${state}`)
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
@@ -23,9 +24,7 @@ export default async function (req, res) {
   const model =  'gpt-4-0613'
 
   try {
-    const completion = await openai.chat.completions.create({
-      messages: [
-        {role: 'system', content: `
+    let prompt = `
           Listen to the radio chatter between fire fighters during an emergency incident.  Try to determine the following information:
             - (radioChannel) Which radio channel are all responders using for this incident?  (radio channels have a letter and a number: A4, B1, etc.) 
             - (incidentLocation) What is the location of the incident?  (should be an address, cross streets, or some other navigable approximation) 
@@ -47,8 +46,16 @@ export default async function (req, res) {
             - (resourcesNeeded) What resources/help is needed? (Any resources or help that has been requested on the radio, if possible make sure to include which unit made the request and which sector they are in)
             - (isParRequested) PAR requested (true/false - has a PAR been requested and is actively being collected?)
             - (parDeclared) Which units have declared PAR (if a PAR is being collected then which units have declared PAR? Should be a list of unit names)
-            
-            Please reply ONLY with JSON data.  Format the JSON data like the following example:
+        `
+    // If not empty state:
+    if(state && Object.keys(state)) {
+      prompt = prompt + `
+        Update the fields for this JSON object:
+          ${state}
+      `
+    } else {
+      prompt = prompt + `
+        Reply ONLY with JSON data.  Format the JSON data like the following example:
             {
               radioChannel: "A1",
               incidentLocation: "Broadway and Main Street",
@@ -88,8 +95,12 @@ export default async function (req, res) {
                 "E123", "L56", ...
               ]
             }
-        `},
-          //Reference
+      `
+    }
+    console.log(`prompt:${prompt}`)
+    const completion = await openai.chat.completions.create({
+      messages: [
+        {role: 'system', content: prompt},
         {role: 'user', content:  inputTxt},
       ],
       model,

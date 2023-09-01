@@ -25,50 +25,27 @@ export default async function (req, res) {
 
 const secToState = {
   31: {
-    "radioChannel": "B3",
-    "incidentLocation": "1564 West Linder",
-    "units": [],
-    "sectors": [],
-    "unitsToRoles": {},
-    "nearestHydrant": "",
-    "symptomsOnScene": "Fully engulfed house fire",
-    "structureDescription": "House",
-    "isWorkingFire": true,
-    "strategy": "",
-    "incidentClassification": "",
-    "alarms": "",
-    "victims": [],
-    "manyVictims": 0,
-    "waterNeeded": [],
-    "sectorsCleared": [],
-    "commandUnit": "",
-    "resourcesNeeded": [],
-    "isParRequested": false,
-    "parDeclared": []
+    speech: " Unit's responding on B3. This is going to be a report of a house fire in the area of Longmore and Linder. We've had one RP so far only. They're advising that a neighbor's house looks like it's on fire, saying it looks like it's fully engulfed. They're saying it's possibly 1564 West Linder, but they're not sure. And we have no further information so far. We've got PD en route as well.",
+    state: "{\n\"radioChannel\": \"B3\",\n\"incidentLocation\": \"1564 West Linder\",\n\"units\": [],\n\"sectors\": [],\n\"unitsToRoles\": {},\n\"nearestHydrant\": \"\",\n\"symptomsOnScene\": [\"Fully engulfed house fire\"],\n\"structureDescription\": \"House\",\n\"isWorkingFire\": true,\n\"strategy\": \"\",\n\"incidentClassification\": [],\n\"alarms\": [],\n\"victims\": [],\n\"manyVictims\": 0,\n\"waterNeeded\": [],\n\"sectorsCleared\": [],\n\"commandUnit\": \"\",\n\"resourcesNeeded\": [\"PD en route\"],\n\"isParRequested\": false,\n\"parDeclared\": []\n}",
   },
-
-  122: {
-    "radioChannel": "unknown",
-    "incidentLocation": "1564 West Linder",
-    "units": ["Engine 207"],
-    "sectors": ["unknown"],
-    "unitsToRoles": {
-      "Engine 207": "mobile command"
-    },
-    "nearestHydrant": "unknown",
-    "symptomsOnScene": "Smoke showing in the backyard. It appears no smoke in the home.",
-    "structureDescription": "Dry mobile home, pitch asphalt, shingle roof.",
-    "isWorkingFire": false,
-    "strategy": "offensive",
-    "incidentClassification": "unknown",
-    "alarms": "unknown",
-    "victims": [],
-    "manyVictims": 0,
-    "waterNeeded": [],
-    "sectorsCleared": [],
-    "commandUnit": "Engine 207",
-    "resourcesNeeded": [],
-    "isParRequested": false,
-    "parDeclared": []
-  }
+  // 40: {
+  //   speech: ,
+  //   state: ,
+  // },
+  // 47: {
+  //   speech: ,
+  //   state: ,
+  // },
+  // 54: {
+  //   speech: ,
+  //   state: ,
+  // },
+  // 97: {
+  //   speech: ,
+  //   state: ,
+  // },
+  // 122: {
+  //   speech: ,
+  //   state: ,
+  // },
 }
