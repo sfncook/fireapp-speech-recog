@@ -23,7 +23,7 @@ export default function Home() {
 
   const submit = async () => {
     try {
-      const response = await fetch("/api/gpt_F2022119715", {
+      const response = await fetch("/api/gptInference", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

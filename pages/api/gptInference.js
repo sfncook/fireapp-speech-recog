@@ -9,9 +9,6 @@ const openai = new OpenAI({
 
 export default async function (req, res) {
   console.log(`gptInference`)
-  console.log(JSON.stringify(req.body))
-  const inputTxt = req.body.inputTxt
-  const state = JSON.stringify(req.body.state)
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
@@ -21,8 +18,32 @@ export default async function (req, res) {
     return;
   }
 
-  // const model = 'gpt-3.5-turbo'
-  const model =  'gpt-4-0613'
+  const foo = [
+    {sec: 31,   speech: " Unit's responding on B3. This is going to be a report of a house fire in the area of Longmore and Linder. We've had one RP so far only. They're advising that a neighbor's house looks like it's on fire, saying it looks like it's fully engulfed. They're saying it's possibly 1564 West Linder, but they're not sure. And we have no further information so far. We've got PD en route as well."},
+    {sec: 40,   speech: " Engine 207 to alarm on channel B3."},
+    {sec: 47,   speech: " Go ahead."},
+    {sec: 54,   speech: " On scene, 1564."},
+    {sec: 97,   speech: " Dry level home with a pitch asphalt shingle roof. We have smoke showing from the backyard. You can see through the front window of the house. There's no smoke inside the home. NG207 will be Suma Command. Command will be Mobile Offensive. We do have our own water supply. It will be Linder Command. Accountability and no IREC at this time will be established."},
+    {sec: 122,  speech: " Alarm copies, we have Engine 207 on scene at 1564 West Linder. We've got a dry mobile home, pitch asphalt, shingle roof. There is smoke showing in the backyard. It appears no smoke in the home. Engine 207 is assuming mobile command will be offensive. They have their own water supply. They're assuming Linder command. We're going to have no IRIC at this time."},
+    // {sec: ,   speech: ""},
+  ]
+
+  let state = {}
+  for (const obj of foo) {
+    const sec = obj['sec']
+    console.log(`sec:${sec}`)
+    const speech = obj['speech']
+    console.log(`speech:${speech}`)
+    state = await sendRequest(speech, state)
+    console.log(state)
+    console.log('\n\n')
+  }
+  res.status(200).json({result: 'ok'})
+}//default func
+
+const sendRequest = async (speech, state) => {
+// const model = 'gpt-3.5-turbo'
+  const model = 'gpt-4-0613'
 
   try {
     let prompt = `
@@ -49,7 +70,7 @@ export default async function (req, res) {
             - (parDeclared) Which units have declared PAR (if a PAR is being collected then which units have declared PAR? Should be a list of unit names)
         `
     // If not empty state:
-    if(state && Object.keys(state).length>0) {
+    if (state && Object.keys(state).length > 0) {
       prompt = prompt + `
         Update the fields for this JSON object:
           ${state}
@@ -102,27 +123,18 @@ export default async function (req, res) {
     const completion = await openai.chat.completions.create({
       messages: [
         {role: 'system', content: prompt},
-        {role: 'user', content:  inputTxt},
+        {role: 'user', content: speech},
       ],
       model,
       temperature: 1,
     });
-    console.log(completion.choices[0].message.content)
-    res.status(200).json({
-      result: completion.choices[0].message.content,
-    });
-  } catch(error) {
-    // Consider adjusting the error handling logic for your use case
+    // console.log(completion.choices[0].message.content)
+    return completion.choices[0].message.content
+  } catch (error) {
     if (error.response) {
       console.error(error.response.status, error.response.data);
-      res.status(error.response.status).json(error.response.data);
     } else {
       console.error(`Error with OpenAI API request: ${error.message}`);
-      res.status(500).json({
-        error: {
-          message: 'An error occurred during your request.',
-        }
-      });
     }
-  }//catch
-}//default func
+  }
+}
