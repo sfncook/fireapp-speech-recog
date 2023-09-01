@@ -18,35 +18,7 @@ export default async function (req, res) {
     return;
   }
 
-  const foo = [
-    {sec: 31,   speech: " Unit's responding on B3. This is going to be a report of a house fire in the area of Longmore and Linder. We've had one RP so far only. They're advising that a neighbor's house looks like it's on fire, saying it looks like it's fully engulfed. They're saying it's possibly 1564 West Linder, but they're not sure. And we have no further information so far. We've got PD en route as well."},
-    {sec: 40,   speech: " Engine 207 to alarm on channel B3."},
-    {sec: 47,   speech: " Go ahead."},
-    {sec: 54,   speech: " On scene, 1564."},
-    {sec: 97,   speech: " Dry level home with a pitch asphalt shingle roof. We have smoke showing from the backyard. You can see through the front window of the house. There's no smoke inside the home. NG207 will be Suma Command. Command will be Mobile Offensive. We do have our own water supply. It will be Linder Command. Accountability and no IREC at this time will be established."},
-    {sec: 122,  speech: " Alarm copies, we have Engine 207 on scene at 1564 West Linder. We've got a dry mobile home, pitch asphalt, shingle roof. There is smoke showing in the backyard. It appears no smoke in the home. Engine 207 is assuming mobile command will be offensive. They have their own water supply. They're assuming Linder command. We're going to have no IRIC at this time."},
-    // {sec: ,   speech: ""},
-  ]
-
-  let state = {}
-  for (const obj of foo) {
-    const sec = obj['sec']
-    console.log(`sec:${sec}`)
-    const speech = obj['speech']
-    console.log(`speech:${speech}`)
-    state = await sendRequest(speech, state)
-    console.log(state)
-    console.log('\n\n')
-  }
-  res.status(200).json({result: 'ok'})
-}//default func
-
-const sendRequest = async (speech, state) => {
-// const model = 'gpt-3.5-turbo'
-  const model = 'gpt-4-0613'
-
-  try {
-    let prompt = `
+  const systemPrompt = `
           Listen to the radio chatter between fire fighters during an emergency incident.  Try to determine the following information:
             - (radioChannel) Which radio channel are all responders using for this incident?  (radio channels have a letter and a number: A4, B1, etc.) 
             - (incidentLocation) What is the location of the incident?  (should be an address, cross streets, or some other navigable approximation) 
@@ -68,15 +40,7 @@ const sendRequest = async (speech, state) => {
             - (resourcesNeeded) What resources/help is needed? (Any resources or help that has been requested on the radio, if possible make sure to include which unit made the request and which sector they are in)
             - (isParRequested) PAR requested (true/false - has a PAR been requested and is actively being collected?)
             - (parDeclared) Which units have declared PAR (if a PAR is being collected then which units have declared PAR? Should be a list of unit names)
-        `
-    // If not empty state:
-    if (state && Object.keys(state).length > 0) {
-      prompt = prompt + `
-        Update the fields for this JSON object:
-          ${state}
-      `
-    } else {
-      prompt = prompt + `
+            
         Reply ONLY with JSON data.  Format the JSON data like the following example:
             {
               radioChannel: "A1",
@@ -118,13 +82,43 @@ const sendRequest = async (speech, state) => {
               ]
             }
       `
-    }
-    console.log(`prompt:${prompt}`)
+  const messages = [
+    {role: 'system', content: systemPrompt},
+  ]
+  const foo = [
+    {sec: 31,   speech: " Unit's responding on B3. This is going to be a report of a house fire in the area of Longmore and Linder. We've had one RP so far only. They're advising that a neighbor's house looks like it's on fire, saying it looks like it's fully engulfed. They're saying it's possibly 1564 West Linder, but they're not sure. And we have no further information so far. We've got PD en route as well."},
+    {sec: 40,   speech: " Engine 207 to alarm on channel B3."},
+    {sec: 47,   speech: " Go ahead."},
+    {sec: 54,   speech: " On scene, 1564."},
+    {sec: 97,   speech: " Dry level home with a pitch asphalt shingle roof. We have smoke showing from the backyard. You can see through the front window of the house. There's no smoke inside the home. NG207 will be Suma Command. Command will be Mobile Offensive. We do have our own water supply. It will be Linder Command. Accountability and no IREC at this time will be established."},
+    {sec: 122,  speech: " Alarm copies, we have Engine 207 on scene at 1564 West Linder. We've got a dry mobile home, pitch asphalt, shingle roof. There is smoke showing in the backyard. It appears no smoke in the home. Engine 207 is assuming mobile command will be offensive. They have their own water supply. They're assuming Linder command. We're going to have no IRIC at this time."},
+    // {sec: ,   speech: ""},
+  ]
+
+  let state = {}
+  for (const obj of foo) {
+    const sec = obj['sec']
+    console.log(`sec:${sec}`)
+    const speech = obj['speech']
+    console.log(`speech:${speech}`)
+    messages.push({role: 'user', content: speech},)
+    state = await sendRequest(messages)
+    console.log(state)
+    messages.push({role: 'assistant', content: state},)
+    console.log('\n\n')
+  }
+  res.status(200).json({result: 'ok'})
+}//default func
+
+const sendRequest = async messages => {
+// const model = 'gpt-3.5-turbo'
+  const model = 'gpt-4-0613'
+
+  try {
+
+    // console.log(messages)
     const completion = await openai.chat.completions.create({
-      messages: [
-        {role: 'system', content: prompt},
-        {role: 'user', content: speech},
-      ],
+      messages,
       model,
       temperature: 1,
     });
