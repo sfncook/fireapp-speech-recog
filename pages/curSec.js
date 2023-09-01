@@ -2,13 +2,14 @@ import { useState, useEffect, useRef } from "react";
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/CurSec.module.css'
+import ObjectTable from "@/components/ObjectTable";
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home()  {
   const [allSeconds, setAllSeconds] = useState([]);
   const [processedSecs, setProcessedSecs] = useState([]);
-  const [state, setState] = useState({});
+  const [state, setState] = useState(null);
   const aud = useRef()
 
   useEffect( () => {
@@ -45,7 +46,8 @@ export default function Home()  {
         });
 
         const data = await response.json()
-        console.log(data.result)
+        console.log(data.result.state)
+        setState(data.result.state)
       } catch(error) {
         console.error(error);
         // alert(error.message)
@@ -64,6 +66,9 @@ export default function Home()  {
             <div>House Fire @ 1564 West Linder</div>
             <audio controls src='audio/F2022119715_orig_regenerated.wav' onTimeUpdate={onTimeUpdate} ref={aud} />
           </div>
+          {
+            state && <ObjectTable data={state}/>
+          }
         </main>
       </>
   )
