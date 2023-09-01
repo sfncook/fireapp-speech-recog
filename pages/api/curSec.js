@@ -1,5 +1,12 @@
 
 export default async function (req, res) {
+  if(req.query && req.query['getAllSec']) {
+    const respon = Object.keys(secToState)
+    console.log(`getAllSec: ${respon}`)
+    res.status(200).json(respon)
+    return
+  }
+
   const curSec = req.body.curSec
   console.log(`curSec ${curSec}`)
   try {
@@ -177,5 +184,5 @@ const secToState = {
       "isParRequested": false,
       "parDeclared": []
     },
-  },
+  }
 }
