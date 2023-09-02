@@ -31,8 +31,7 @@ export default function Home()  {
     }
   }, []);
 
-  const onTimeUpdate = async () => {
-    const curSec = Math.floor(aud.current.currentTime)
+  const processSec = async curSec => {
     if(allSeconds.includes(curSec) && !processedSecs.includes(curSec)) {
       console.log(`process curSec:${curSec}`)
       setProcessedSecs([...processedSecs, curSec])
@@ -46,13 +45,38 @@ export default function Home()  {
         });
 
         const data = await response.json()
-        console.log(data.result.state)
-        setState(data.result.state)
+        const _state = JSON.parse(data.result.state)
+        setState(_state)
       } catch(error) {
         console.error(error);
-        // alert(error.message)
+        alert(error.message)
       }
     }
+  }
+
+  const onTimeUpdate = async () => {
+    const curSec = Math.floor(aud.current.currentTime)
+    processSec(curSec)
+  }
+
+  const findNextLower = (sortedArray, searchValue) => {
+    for (let i = 0; i < sortedArray.length - 1; i++) {
+      const lower = sortedArray[i]
+      const higher = sortedArray[i + 1]
+      // console.log(`lower:${lower} higher:${higher}`)
+      if ( lower <= searchValue && higher > searchValue) {
+        return sortedArray[i];
+      }
+    }
+    if(searchValue<sortedArray[0]) return sortedArray[0]
+    else return sortedArray.splice(-1);
+  }
+
+  const onSeeked = async () => {
+    const curSec = Math.floor(aud.current.currentTime)
+    const sortedSecs = [...allSeconds].sort((a, b) => a - b)
+    const nextLower = findNextLower(sortedSecs, curSec)
+    console.log(`onSeeked: ${curSec} nextLower: ${nextLower}`)
   }
 
   return (
@@ -64,7 +88,11 @@ export default function Home()  {
         <main className={`${styles.main} ${inter.className}`}>
           <div>
             <div>House Fire @ 1564 West Linder</div>
-            <audio controls src='audio/F2022119715_orig_regenerated.wav' onTimeUpdate={onTimeUpdate} ref={aud} />
+            <audio controls src='audio/F2022119715_orig_regenerated.wav'
+                   onTimeUpdate={onTimeUpdate}
+                   onSeeked={onSeeked}
+                   ref={aud}
+            />
           </div>
           {
             state && <ObjectTable data={state}/>
