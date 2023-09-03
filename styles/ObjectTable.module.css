@@ -17,9 +17,11 @@
 .keyCell {
   font-weight: bold;
   white-space: nowrap;
+  font-size: small;
 }
 
 .valueCell {
   font-style: italic;
   width: 100%;
+  font-size: small;
 }

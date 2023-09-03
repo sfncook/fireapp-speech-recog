@@ -30,12 +30,6 @@ const ObjectTable = ({ data }) => {
 
     return (
         <table className={styles.objectTable}>
-            <thead>
-            <tr>
-                <th>Key</th>
-                <th>Value</th>
-            </tr>
-            </thead>
             <tbody>{renderTableRows()}</tbody>
         </table>
     );
