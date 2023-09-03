@@ -92,7 +92,7 @@ export default function Home()  {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <main className={`${styles.main} ${inter.className}`}>
-          <div>
+          <div className={styles.outerheaderrow}>
             <div>House Fire @ 1564 West Linder</div>
             <div className={styles.headerrow}>
               <audio controls src='audio/F2022119715_orig_regenerated.wav'
@@ -100,7 +100,7 @@ export default function Home()  {
                      onSeeked={onSeeked}
                      ref={aud}
               />
-              <div className={styles.lastspeech}>{lastSpeech}</div>
+              <div className={styles.lastspeech}>{`"${lastSpeech}"`}</div>
             </div>
           </div>
           {

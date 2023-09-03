@@ -238,13 +238,22 @@
   padding-right: 10px;
 }
 
+.outerheaderrow {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
 .headerrow {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  width: 100%
 }
 .lastspeech {
   font-style: italic;
   margin: 10px;
   color: rgb(128, 128, 128);
+  background-color: white;
+  width: 100%;
 }
