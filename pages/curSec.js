@@ -45,8 +45,9 @@ export default function Home()  {
         });
 
         const data = await response.json()
-        const _state = JSON.parse(data.result.state)
-        setState(_state)
+        const _state = data.result.state
+        const waitMs = (data.result.endSec - data.result.startSec)*1000
+        setTimeout(()=>setState(_state), waitMs)
       } catch(error) {
         console.error(error);
         alert(error.message)
