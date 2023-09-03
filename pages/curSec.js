@@ -5,12 +5,13 @@ import styles from '@/styles/CurSec.module.css'
 import ObjectTable from "@/components/ObjectTable";
 
 const inter = Inter({ subsets: ['latin'] })
+const initState = {'radioChannel': '', 'incidentLocation': '', 'units': [], 'sectors': [], 'unitsToRoles': {}, 'nearestHydrant': '', 'symptomsOnScene': '', 'structureDescription': '', 'isWorkingFire': '', 'strategy': '', 'incidentClassification': '', '': 'unknown', 'victims': [], 'manyVictims': 0, 'waterNeeded': [], 'sectorsCleared': [], 'commandUnit': '', 'resourcesNeeded': [], 'isParRequested': false, 'parDeclared': []}
 
 export default function Home()  {
   const [allSeconds, setAllSeconds] = useState([]);
   const [processedSecs, setProcessedSecs] = useState([]);
-  const [state, setState] = useState(null);
-  const [lastSpeech, setLastSpeech] = useState('')
+  const [state, setState] = useState(initState);
+  const [lastSpeech, setLastSpeech] = useState()
   const aud = useRef()
 
   useEffect( () => {
@@ -100,7 +101,7 @@ export default function Home()  {
                      onSeeked={onSeeked}
                      ref={aud}
               />
-              <div className={styles.lastspeech}>{`"${lastSpeech}"`}</div>
+              {lastSpeech && <div className={styles.lastspeech}>{`"${lastSpeech}"`}</div>}
             </div>
           </div>
           {
