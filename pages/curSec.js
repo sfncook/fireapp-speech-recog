@@ -95,14 +95,13 @@ export default function Home()  {
         <main className={`${styles.main} ${inter.className}`}>
           <div className={styles.outerheaderrow}>
             <div>House Fire @ 1564 West Linder</div>
-            <div className={styles.headerrow}>
-              <audio controls src='audio/F2022119715_orig_regenerated.wav'
-                     onTimeUpdate={onTimeUpdate}
-                     onSeeked={onSeeked}
-                     ref={aud}
-              />
-              {lastSpeech && <div className={styles.lastspeech}>{`"${lastSpeech}"`}</div>}
-            </div>
+            <audio controls src='audio/F2022119715_orig_regenerated.wav'
+                   onTimeUpdate={onTimeUpdate}
+                   onSeeked={onSeeked}
+                   ref={aud}
+                   className={styles.radioAudio}
+            />
+            {lastSpeech && <div className={styles.lastspeech}>{`"${lastSpeech}"`}</div>}
           </div>
           {
             state && <ObjectTable data={state}/>
