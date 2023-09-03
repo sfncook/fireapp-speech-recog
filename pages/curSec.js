@@ -12,6 +12,7 @@ export default function Home()  {
   const [processedSecs, setProcessedSecs] = useState([]);
   const [state, setState] = useState(initState);
   const [lastSpeech, setLastSpeech] = useState()
+  const [isRecording, setIsRecording] = useState(false)
   const aud = useRef()
 
   useEffect( () => {
@@ -36,6 +37,7 @@ export default function Home()  {
   const processSec = async curSec => {
     if(allSeconds.includes(curSec) && !processedSecs.includes(curSec)) {
       console.log(`process curSec:${curSec}`)
+      setIsRecording(true)
       setProcessedSecs([...processedSecs, curSec])
       try {
         const response = await fetch("/api/curSec", {
@@ -53,6 +55,7 @@ export default function Home()  {
         setTimeout(()=>{
           setState(_state)
           setLastSpeech(speech)
+          setIsRecording(false)
         }, waitMs)
       } catch(error) {
         console.error(error);
@@ -83,9 +86,10 @@ export default function Home()  {
     const curSec = Math.floor(aud.current.currentTime)
     const sortedSecs = [...allSeconds].sort((a, b) => a - b)
     const nextLower = findNextLower(sortedSecs, curSec)
-    console.log(`onSeeked: ${curSec} nextLower: ${nextLower}`)
+    // console.log(`onSeeked: ${curSec} nextLower: ${nextLower}`)
   }
 
+  const dotStyle = isRecording ? `${styles.dot} ${styles.recordingdot} ${styles.blinking}` : styles.dot
   return (
       <>
         <Head>
@@ -101,7 +105,12 @@ export default function Home()  {
                    ref={aud}
                    className={styles.radioAudio}
             />
-            {lastSpeech && <div className={styles.lastspeech}>{`"${lastSpeech}"`}</div>}
+            <div className={styles.speechrow}>
+              <div className={dotStyle}> </div>
+              {
+                lastSpeech && <div className={styles.lastspeech}>{`"${lastSpeech}"`}</div>
+              }
+            </div>
           </div>
           {
             state && <ObjectTable data={state}/>
