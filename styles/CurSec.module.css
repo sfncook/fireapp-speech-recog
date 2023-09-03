@@ -237,3 +237,14 @@
   padding-left: 10px;
   padding-right: 10px;
 }
+
+.headerrow {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+.lastspeech {
+  font-style: italic;
+  margin: 10px;
+  color: rgb(128, 128, 128);
+}

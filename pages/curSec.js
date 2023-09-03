@@ -10,6 +10,7 @@ export default function Home()  {
   const [allSeconds, setAllSeconds] = useState([]);
   const [processedSecs, setProcessedSecs] = useState([]);
   const [state, setState] = useState(null);
+  const [lastSpeech, setLastSpeech] = useState('')
   const aud = useRef()
 
   useEffect( () => {
@@ -46,8 +47,12 @@ export default function Home()  {
 
         const data = await response.json()
         const _state = data.result.state
+        const speech = data.result.speech
         const waitMs = (data.result.endSec - data.result.startSec)*1000
-        setTimeout(()=>setState(_state), waitMs)
+        setTimeout(()=>{
+          setState(_state)
+          setLastSpeech(speech)
+        }, waitMs)
       } catch(error) {
         console.error(error);
         alert(error.message)
@@ -89,11 +94,14 @@ export default function Home()  {
         <main className={`${styles.main} ${inter.className}`}>
           <div>
             <div>House Fire @ 1564 West Linder</div>
-            <audio controls src='audio/F2022119715_orig_regenerated.wav'
-                   onTimeUpdate={onTimeUpdate}
-                   onSeeked={onSeeked}
-                   ref={aud}
-            />
+            <div className={styles.headerrow}>
+              <audio controls src='audio/F2022119715_orig_regenerated.wav'
+                     onTimeUpdate={onTimeUpdate}
+                     onSeeked={onSeeked}
+                     ref={aud}
+              />
+              <div className={styles.lastspeech}>{lastSpeech}</div>
+            </div>
           </div>
           {
             state && <ObjectTable data={state}/>
